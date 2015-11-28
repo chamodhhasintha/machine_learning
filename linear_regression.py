@@ -1,7 +1,11 @@
 import os.path
 
 def read_file(filename):
-    handler = open(filename,'r')
+    try:
+        handler = open(filename,'r')
+    except Exception,e:
+        print "open %s failed!"%filename
+        return
     line = handler.readline().strip().split(',')
     years = []
     for year in line:
@@ -18,9 +22,9 @@ def write_file(filename,datas):
         handler.write("%s %s\n"%(year,price))
     
 if __name__ == "__main__":
-    path = 'D:\Source\machine_learning'
-    rf = 'linear_regression_data.txt'
-    wf = 'linear_regression_data_1.txt'
+    path = 'D:\Source_File\machine_learning'
+    rf = 'test.txt'
+    wf = 'linear_regression_data.txt'
     datas = read_file(os.path.join(path,rf))
     for year,price in datas:
         print "%s %s"%(year,price)
